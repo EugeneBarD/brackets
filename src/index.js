@@ -1,23 +1,32 @@
-module.exports = function check(str, bracketsConfig) {
-    let implement = [];
-    let checkNum = 0;
-    for (let i = 0; i < bracketsConfig.length; i++) {
-        implement[i] = bracketsConfig[i].join('');
+module.exports = function check(str, bracketsConfig) 
+{
+    if(str.length % 2 != 0) return false;
+    
+    let brackets = []
+    for(let i = 0; i < bracketsConfig.length; i++)
+    {
+        brackets[i] = bracketsConfig[i].join('');
     }
-    let counter = 0;
-    let j = 0;
-    while(counter < implement.length) {
-        while (j < str.length) {
-            checkNum = str.indexOf(implement[counter]);
-            if (checkNum !== -1){
-                str = str.substring(0, checkNum) + str.substring(checkNum+implement[counter].length, str.length);
-                counter = 0;
-            } else {
-                j = str.length;
+
+    console.log(str);
+
+    for(let i = 0; i < brackets.length ** 2; i++) 
+    {
+        let j = 0;
+        while (true) 
+        {
+            if(!str.includes(brackets[j]) && j < brackets.length) { j++; }
+            else
+            {
+                while (str.includes(brackets[j])) 
+                {
+                    str = str.split(brackets[j]).join('');
+                    console.log(str);
+                }
+                break;
             }
         }
-        counter++;
-        j = 0;
     }
-    return (!str);
+
+    return str.length != 0 ? false : true ;
 };
